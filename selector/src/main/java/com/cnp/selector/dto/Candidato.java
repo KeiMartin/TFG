@@ -29,11 +29,9 @@ public class Candidato implements Comparable<Candidato>{
 	public int compareTo(Candidato o) {
 		// TODO Auto-generated method stub
 		//primero se compara por valoración
-		int resultado = Integer.compare(o.getValoracion(), this.getValoracion());
+		int resultado = Integer.compare(o.getValoracion(), this.getValoracion());//de mayor a menor
 		if (resultado == 0)
-			resultado = Integer.compare(this.getPrioridad(), o.getPrioridad());
+			resultado = Integer.compare(this.getPrioridad(), o.getPrioridad());//de menor a mayor
 		return resultado;
 	}
-	
-
 }
