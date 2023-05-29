@@ -1,0 +1,7 @@
+com\cnp\selector\servicios\impl\FiltrarServicioImpl.class
+com\cnp\selector\servicios\impl\CsvServicioImpl.class
+com\cnp\selector\controlador\SelectorControlador.class
+com\cnp\selector\servicios\FiltrarServicio.class
+com\cnp\selector\servicios\CsvServicio.class
+com\cnp\selector\dto\Candidato.class
+com\cnp\selector\SelectorApplication.class
