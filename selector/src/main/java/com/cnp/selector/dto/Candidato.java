@@ -5,7 +5,7 @@ import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
 
 @Data
-public class Candidato implements Comparable<Candidato>{
+public class Candidato implements Comparable<Candidato>{//para poder ordenarlos
 	
 	@CsvBindByPosition(position = 0)
 	private String dni;
@@ -16,7 +16,7 @@ public class Candidato implements Comparable<Candidato>{
 	@CsvBindByPosition(position = 2)
 	private String nombre;
 	
-	@CsvBindByPosition(position = 7)
+	@CsvBindByPosition(position = 7)//está en plantilla, poner provincia
 	private String plantilla;
 	
 	@CsvBindByPosition(position = 13)
@@ -24,10 +24,8 @@ public class Candidato implements Comparable<Candidato>{
 	
 	@CsvBindByPosition(position = 14)
 	private int prioridad;
-	
-	@Override
+		
 	public int compareTo(Candidato o) {
-		// TODO Auto-generated method stub
 		//primero se compara por valoración
 		int resultado = Integer.compare(o.getValoracion(), this.getValoracion());//de mayor a menor
 		if (resultado == 0)

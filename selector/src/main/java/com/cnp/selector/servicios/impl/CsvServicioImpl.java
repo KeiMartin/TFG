@@ -19,10 +19,10 @@ import com.opencsv.bean.CsvToBeanBuilder;
 public class CsvServicioImpl implements CsvServicio {
 	public List<Candidato> convertirCsv(MultipartFile archivo) throws IOException {
 		Reader lector = new InputStreamReader(archivo.getInputStream());
-		CSVReader lectorCsv = new CSVReaderBuilder(lector)
+		CSVReader lectorCsv = new CSVReaderBuilder(lector)//leo fichero mediante openCsv=estructura del fichero
 				.withSkipLines(1)//salto las cabeceras
 				.build();
-		CsvToBean<Candidato> csvToCandidato = new CsvToBeanBuilder<Candidato>(lectorCsv)
+		CsvToBean<Candidato> csvToCandidato = new CsvToBeanBuilder<Candidato>(lectorCsv) //openCsv=cada fila es un objeto candidato
 				.withType(Candidato.class)
                 .build();
 		return csvToCandidato.parse();
