@@ -8,15 +8,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.cnp.selector.dto.Candidato;
 import com.cnp.selector.servicios.FiltrarServicio;
-
+@Service
 public class FiltrarServicioImpl implements FiltrarServicio {
 
 	public List<Candidato> seleccionar(List<Candidato> candidatos, Integer plazas) {
-		List<Candidato> candidatosUnificados = unificarPlantillas(candidatos, plazas);
-		Collections.sort(candidatosUnificados);
-		return null;
+		List<Candidato> candidatosUnificados = unificarPlantillas(candidatos, plazas);//lista sin menores
+		Collections.sort(candidatosUnificados);//ordenada por valoracion y prioridad
+		return obtenerSeleccionados(candidatosUnificados, plazas);//lista cortada en n plazas
 	}
 		
 	private List<Candidato> unificarPlantillas(List<Candidato> candidatos, Integer plazas){
@@ -63,14 +65,14 @@ public class FiltrarServicioImpl implements FiltrarServicio {
 		return bd.doubleValue();
 	}
 	
-	private List<Candidato> obtenerSeleccionados(List<Candidato> candidatos, Integer plazas){
-		Map<String, Double> mapaRatioFin = calcularRatio(candidatos, plazas);
+	private List<Candidato> obtenerSeleccionados(List<Candidato> candidatosUnificados, Integer plazas){
+		Map<String, Double> mapaRatioFin = calcularRatio(candidatosUnificados, plazas);
 		List<Candidato> candidatosSeleccionados = new ArrayList<>();
-		for(Candidato c: candidatos){
+		for(Candidato c: candidatosUnificados){
 			var plantilla = c.getPlantilla();
+			var plazasLibresPlantilla = mapaRatioFin.get(plantilla);
 			var plazasAdjudicadas = candidatosSeleccionados.size();
-			var plazasRestantesPlantilla = mapaRatioFin.get(plantilla);
-			if (plazasAdjudicadas < plazas && plazasRestantesPlantilla > 0) {
+			if (plazasAdjudicadas < plazas && plazasLibresPlantilla > 0) {
 				candidatosSeleccionados .add(c);
 				mapaRatioFin.put(plantilla, mapaRatioFin.get(plantilla) - 1);
 			}

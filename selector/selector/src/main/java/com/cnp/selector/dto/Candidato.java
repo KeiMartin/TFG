@@ -24,7 +24,7 @@ public class Candidato implements Comparable<Candidato>{//para poder ordenarlos
 	
 	@CsvBindByPosition(position = 14)
 	private int prioridad;
-	
+		
 	public int compareTo(Candidato o) {
 		//primero se compara por valoración
 		int resultado = Integer.compare(o.getValoracion(), this.getValoracion());//de mayor a menor

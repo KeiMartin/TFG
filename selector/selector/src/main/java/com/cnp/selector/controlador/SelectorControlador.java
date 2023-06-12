@@ -1,7 +1,6 @@
 package com.cnp.selector.controlador;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +13,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cnp.selector.dto.Candidato;
 import com.cnp.selector.servicios.CsvServicio;
+import com.cnp.selector.servicios.FiltrarServicio;
 
 @RestController
 public class SelectorControlador {
 
 	@Autowired
 	CsvServicio csvServicio;
+	@Autowired
+	FiltrarServicio filtrarServicio;
 	
 	//voy a hacer el endpoint
 	@PostMapping(path="/seleccionar", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })//nombre-ruta endpoint
 	public List<Candidato> seleccionarCandidatos(@RequestPart MultipartFile csv, @RequestParam("plazas") Integer plazas) throws IOException {
 		//return csvServicio.convertirCsv(csv);
 		List<Candidato> candidatos = csvServicio.convertirCsv(csv);		
-		Collections.sort(candidatos);
-		return candidatos;
+	return filtrarServicio.seleccionar(candidatos, plazas);
 	}
 }
