@@ -72,7 +72,7 @@ public class FiltrarServicioImpl implements FiltrarServicio {
 			var plantilla = c.getPlantilla();
 			var plazasLibresPlantilla = mapaRatioFin.get(plantilla);
 			var plazasAdjudicadas = candidatosSeleccionados.size();
-			if (plazasAdjudicadas <= plazas && plazasLibresPlantilla > 0) {
+			if (plazasAdjudicadas < plazas && plazasLibresPlantilla > 0.5) {
 				candidatosSeleccionados .add(c);
 				mapaRatioFin.put(plantilla, mapaRatioFin.get(plantilla) - 1);
 			}

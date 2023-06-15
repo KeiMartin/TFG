@@ -16,7 +16,7 @@ public class Candidato implements Comparable<Candidato>{//para poder ordenarlos
 	@CsvBindByPosition(position = 2)
 	private String nombre;
 	
-	@CsvBindByPosition(position = 7)//está en plantilla, poner provincia
+	@CsvBindByPosition(position = 7)
 	private String plantilla;
 	
 	@CsvBindByPosition(position = 13)
